@@ -100,11 +100,18 @@ $pdf->SetXY(92, 90); // X start, Y start in mm
 $text = $data['codPostal'];
 $pdf->Write(0, $text);
 
+// prepare a base64 encoded "data url"
+$pic = $data['signature'];
+// extract dimensions from image
+$info = getimagesize($pic);
+
+$pdf->Image($pic, 40, 230, 50, 50, 'png');
+
 // CNP
 // $data['cnp'] = '5010118394072';
 for ($i = 0; $i < strlen($data['cnp']); $i++) {
     // echo $data['cnp'][$i];
-    $pdf->SetXY(118 + ($i * 6), 60); // X start, Y start in mm
+    $pdf->SetXY(118 + ($i * 6.4), 61); // X start, Y start in mm
     $text = $data['cnp'][$i];
     $pdf->Write(0, $text);
 }
